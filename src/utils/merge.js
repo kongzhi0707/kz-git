@@ -22,10 +22,12 @@ async function mergeProcess({ target = 'dev' }) {
   // 合并代码
   mergeBranch(sourceBranch, target);
   // 询问是否需要推送到远程
-  const isPushRemote = await confirm({
+  const { isPushRemote } = await inquirer.prompt([{
     message: "是否要上传到远程分支？",
+    type: "confirm",
+    name: "isPushRemote",
     default: true,
-  });
+  }]);
   if (isPushRemote) { 
     pushToRemote();
   }
