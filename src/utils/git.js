@@ -39,6 +39,36 @@ function commitCode(result) {
   console.log(chalk.green(`git commit 提交成功`));
 }
 
+// 把远程的分支拉取到本地
+function remoteBranch(branchName) { 
+  const { code, stderr } = shell.exec(`git fetch origin ${branchName}`);
+  if (code !== 0) {
+    handleError(stderr);
+    return;
+  }
+  console.log(chalk.green(`已成功将远程分支拉取到本地`));
+}
+
+// 在本地创建分支 并且切换到该分支
+function localCreateBranch(branchName) { 
+  const { code, stderr } = shell.exec(`git checkout -b ${branchName} origin/${branchName}`);
+  if (code !== 0) {
+    handleError(stderr);
+    return;
+  }
+  console.log(chalk.green(`已成功在本地创建分支且切换到该分支上`));
+}
+// 把远程分支拉取到本地
+function remoteBranchToLocal(branchName) { 
+  const { code, stderr } = shell.exec(`git pull origin ${branchName}`);
+  if (code !== 0) {
+    handleError(stderr);
+    return;
+  }
+  console.log(chalk.green(`远程的分支已拉取到本地了`));
+}
+
+
 // 获取当前的分支名
 function getCurrentBranchName() { 
   const { stdout, code, stderr } = shell.exec('git symbolic-ref --short -q HEAD', { slient: true, });
@@ -112,12 +142,15 @@ function pushToRemote() {
 }
 
 module.exports = { 
-  addCode,
-  commitCode,
+  addCode, // 已成功将工作区的文件添加到暂存区了
+  commitCode, // 将暂存区内容提交到版本库
   hasGit,
-  getCurrentBranchName,
-  pullBranch,
-  checkoutBranch,
-  mergeBranch,
-  pushToRemote,
+  getCurrentBranchName, // 获取当前分支名称
+  pullBranch, // 拉取分支
+  checkoutBranch, // 切换分支
+  mergeBranch, // 合并分支
+  pushToRemote, // 推送到远程
+  remoteBranch, // 把远程的分支拉取到本地
+  localCreateBranch, // 在本地创建分支 并且切换到该分支
+  remoteBranchToLocal, // 把远程分支拉取到本地
 }
