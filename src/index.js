@@ -1,18 +1,24 @@
 #!/usr/bin/env node
-const { program } = require('commander');
+const cac = require('cac');
 
-// 引入package.json
-const PKG = require('../package.json');
+const pkg = require('../package.json');
+const cli_name = 'kz-git';
+const cli = cac(cli_name);
 
 const { mergeProcess } = require('./utils/merge');
+cli
+  .command('[target_branch]', 'merge current branch into target_branch')
+  .example('amg master    merge current branch into the branch which named "master"')
+  .action((targetBranch) => {
+    // 如果没有输入参数，则输出帮助信息
+    if (targetBranch === undefined) {
+      cli.outputHelp();
+    } else {
+      mergeProcess({ target: targetBranch });
+    }
+  });
 
-program.version(PKG.version); // 设置版本默认命令 -V --version
+cli.help();
+cli.version(pkg.version);
 
-program.command('[target_branch]').description('merge current branch into target_branch').action(targetBranch => {
-  // 如果没有输入参数
-  if (targetBranch) {
-    mergeProcess({ target: targetBranch });
-  }
-})
-
-program.parse(process.argv);
+cli.parse();
