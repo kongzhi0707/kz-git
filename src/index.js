@@ -13,6 +13,6 @@ program.command('[target_branch]').description('merge current branch into target
   if (targetBranch) {
     mergeProcess({ target: targetBranch });
   }
-});
+})
 
 program.parse(process.argv);
