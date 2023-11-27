@@ -36,7 +36,13 @@ function commitCode() {
     {
       type: "input",
       message: "请输入提交的注释",
-      name: "result"
+      name: "result",
+      validate(value) { 
+        if (!value) { 
+          return '请输入提交的内容';
+        }
+        return true;
+      }
     }
   ]);
   const { code, stderr } = shell.exec(`git commit -m ${result}`);
