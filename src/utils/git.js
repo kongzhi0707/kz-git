@@ -1,6 +1,7 @@
 
 const shell = require('shelljs');
 const chalk = require('chalk'); // console 变颜色
+const inquirer = require('inquirer');
 
 // 命令运行结果输出到终端
 shell.config.silent = false;
@@ -17,6 +18,33 @@ function hasGit() {
   if (!shell.which('git')) { 
     handleError('Sorry, the script requires git');
   }
+}
+
+// 在当前分支下 add 代码
+function addCode() { 
+  const { code, stderr } = shell.exec(`git add .`);
+  if (code !== 0) { 
+    handleError(stderr);
+    return;
+  }
+  console.log(chalk.green(`git add 已成功将工作区的文件添加到暂存区了`));
+}
+
+// 将暂存区内容提交到版本库
+function commitCode() { 
+  const { result } = inquirer.prompt([
+    {
+      type: "input",
+      message: "请输入提交的注释",
+      name: "result"
+    }
+  ]);
+  const { code, stderr } = shell.exec(`git commit -m ${result}`);
+  if (code !== 0) {
+    handleError(stderr);
+    return;
+  }
+  console.log(chalk.green(`git commit 提交成功`));
 }
 
 // 获取当前的分支名
@@ -92,6 +120,8 @@ function pushToRemote() {
 }
 
 module.exports = { 
+  addCode,
+  commitCode,
   hasGit,
   getCurrentBranchName,
   pullBranch,
