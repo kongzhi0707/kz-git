@@ -11,9 +11,13 @@ async function pushProcess() {
   // 将工作区的文件添加到暂存区了
   addCode();
   // 提交代码
-  commitCode();
-  // 推送到远程
-  pushToRemote();
+  const result = commitCode();
+
+  if (result) { 
+    // 推送到远程
+    pushToRemote();
+  }
+  
 }
 
 module.exports = {

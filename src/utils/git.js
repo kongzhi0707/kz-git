@@ -32,7 +32,7 @@ function addCode() {
 
 // 将暂存区内容提交到版本库
 function commitCode() { 
-  const { result } = inquirer.prompt([
+  const result = inquirer.prompt([
     {
       type: "input",
       message: "请输入提交的注释",
@@ -44,13 +44,16 @@ function commitCode() {
         return true;
       }
     }
-  ]);
-  const { code, stderr } = shell.exec(`git commit -m ${result}`);
-  if (code !== 0) {
-    handleError(stderr);
-    return;
-  }
-  console.log(chalk.green(`git commit 提交成功`));
+  ]).then(res => { 
+    console.log('---res---', res);
+    const { code, stderr } = shell.exec(`git commit -m ${res.result}`);
+    if (code !== 0) {
+      handleError(stderr);
+      return;
+    }
+    console.log(chalk.green(`git commit 提交成功`));
+  })
+  return result;
 }
 
 // 获取当前的分支名
