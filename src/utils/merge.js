@@ -30,10 +30,12 @@ async function mergeProcess({ target = 'dev' }) {
     pushToRemote();
   }
   // 询问是否要返回原分支
-  const isBackToSourceBranch = await confirm({
+  const { isBackToSourceBranch } = await inquirer.prompt([{
     message: "是否要返回原来的分支？",
+    type: "confirm",
+    name: "isBackToSourceBranch",
     default: true,
-  });
+  }]);
   if (isBackToSourceBranch) { 
     checkoutBranch(sourceBranch);
   }
