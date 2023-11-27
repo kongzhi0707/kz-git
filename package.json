@@ -1,0 +1,25 @@
+{
+  "name": "kz-git",
+  "version": "1.0.0",
+  "description": "git 命令行工具",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "kz-git": "./src/index.js"
+  },
+  "keywords": [
+    "git",
+    "command"
+  ],
+  "author": "kongzhi",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "commander": "^11.1.0",
+    "inquirer": "^8.0.0",
+    "node-http-ping": "^0.3.1",
+    "shelljs": "^0.8.5"
+  }
+}
