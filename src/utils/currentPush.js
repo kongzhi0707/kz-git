@@ -24,6 +24,7 @@ async function pushProcess() {
       }
     }
   ])
+  console.log('---result---', result);
   if (result) { 
     // 提交代码
     commitCode(result);
