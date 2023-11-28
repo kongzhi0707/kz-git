@@ -86,6 +86,7 @@ git push
 
 代码目录结构如下:
 
+```
 |--- src
 | |--- utils
 | | |--- currentPush.js
@@ -94,6 +95,7 @@ git push
 | | |--- remoteBranchToLocal.js
 | |--- index.js
 | |--- package.json
+```
 
 src/index.js 入口文件的代码如下：
 
