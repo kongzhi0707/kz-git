@@ -7,7 +7,7 @@ const cli = cac(pkg.name);
 
 const { mergeProcess } = require('./utils/merge');
 const { pushProcess } = require('./utils/currentPush');
-const { remoteBranchLocal } = require('./utils/remoteBranchToLocal');
+const { remoteBranchLocal } = require('./utils/remoteBranchToLocal')
 
 cli
   .command('[target_branch]', '合并当前的分支代码到目标分支上')
