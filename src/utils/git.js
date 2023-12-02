@@ -137,7 +137,7 @@ function pushToRemote() {
     stdout,
     code,
     stderr
-  } = shell.exec('git branch -rv', {
+  } = shell.exec('git branch -r', {
     silent: true,
   });
   console.log('---获取远程分支--stdout--', stdout);
