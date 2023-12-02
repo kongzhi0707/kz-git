@@ -7,7 +7,12 @@ const cli = cac(pkg.name);
 
 const { mergeProcess } = require('./utils/merge');
 const { pushProcess } = require('./utils/currentPush');
-const { remoteBranchLocal } = require('./utils/remoteBranchToLocal')
+const { remoteBranchLocal } = require('./utils/remoteBranchToLocal');
+
+const {
+  showGlobal,
+  globalConfig,
+} = require('./utils/globalConfig');
 
 cli
   .command('[target_branch]', '合并当前的分支代码到目标分支上')
@@ -32,6 +37,19 @@ cli
   .action(async () => {
     await remoteBranchLocal();
 });
+
+cli
+  .command('showcfg', '查看global全局配置')
+  .action(async () => {
+    await showGlobal();
+});
+
+cli
+  .command('gconfig', '全局配置')
+  .action(async () => {
+    await globalConfig();
+});
+
 
 cli.help();
 cli.version(pkg.version);
