@@ -134,7 +134,7 @@ function mergeBranch(sourceBranch, targetBranch) {
 function pushToRemote() { 
   console.log('准备推送到远程仓库...');
   const sourceBranch = getCurrentBranchName();
-  const { code } = shell.exec('git push origin daily/0.0.2');
+  const { code } = shell.exec('git push --set-upstream origin daily/0.0.2');
   if (code !== 0) { 
     console.log(chalk.red('推送出现问题'));
     shell.exec(-1);
