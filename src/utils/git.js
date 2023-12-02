@@ -133,12 +133,18 @@ function mergeBranch(sourceBranch, targetBranch) {
 // 推送当前分支到远程仓库
 function pushToRemote() { 
   console.log('准备推送到远程仓库...');
+  const remoteBranch = shell.exec('git branch -rv');
+  console.log('---获取远程分支----', remoteBranch);
+  return;
+  /*
   const { code } = shell.exec('git push');
   if (code !== 0) { 
     console.log(chalk.red('推送出现问题'));
     shell.exec(-1);
+    return;
   }
   console.log(chalk.green('推送远程分支成功'));
+  */
 };
 
 module.exports = { 
