@@ -139,7 +139,7 @@ function pushToRemote() {
     shell.exec(-1);
   }
   console.log(chalk.green('推送远程分支成功'));
-}
+};
 
 module.exports = { 
   addCode, // 已成功将工作区的文件添加到暂存区了
